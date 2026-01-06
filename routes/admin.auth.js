@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const userModel = require("../../Book-Store-Project/models/user");
+const userModel = require("../models/user");
+// const userModel = require("../../Book-Store-Project/models/user");
+// this is used for local run purpose
 
 // ===============================
 // ADMIN LOGIN PAGE

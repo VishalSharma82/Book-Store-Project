@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const postModel = require("../../Book-Store-Project/models/postbook");
-const userModel = require("../../Book-Store-Project/models/user");
+const postModel = require("../models/postbook");
+const userModel = require("../models/user");
+// const postModel = require("../../Book-Store-Project/models/postbook");
+// const userModel = require("../../Book-Store-Project/models/user");
+// this is used for local run purpose
 const isLoggedIn = require("../middleware/isLoggedIn");
 const isAdmin = require("../middleware/isAdmin");
 
