@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= book.title %> | View Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <h1 class="text-2xl font-semibold mb-6 text-center">View Book Post</h1>
+
+        <div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Book Image -->
+            <div>
+                <img src="/images/default-book.png" alt="<%= book.title %>" class="w-full h-80 object-cover rounded-lg shadow-sm">
+            </div>
+
+            <!-- Book Details -->
+            <div>
+                <h2 class="text-xl font-semibold mb-2"><%= book.title %></h2>
+                <p><strong>Purpose:</strong> <%= book.bookPurpose %></p>
+                <p><strong>Type:</strong> <%= book.bookType %></p>
+                <% if (book.bookType === 'used') { %>
+                    <p><strong>Condition:</strong> <%= book.bookCondition %></p>
+                <% } %>
+                <p><strong>Quantity:</strong> <%= book.quantity %></p>
+                <p><strong>Price:</strong> ₹<%= book.price %></p>
+
+                <% if (book.freeShipping) { %>
+                    <p class="text-green-600 font-semibold">Free Shipping Available</p>
+                <% } else { %>
+                    <p><strong>Shipping Charges:</strong> ₹<%= book.shippingCharges %></p>
+                <% } %>
+
+                <div class="mt-4">
+                    <h3 class="text-lg font-semibold mb-1">Seller Details:</h3>
+                    <p><strong>Name:</strong> <%= book.sellerDetails.name %></p>
+                    <p><strong>Email:</strong> <%= book.sellerDetails.email %></p>
+                    <p><strong>Phone:</strong> <%= book.sellerDetails.phone %></p>
+                    <p><strong>Address:</strong> <%= book.sellerDetails.address %></p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-6 space-y-2">
+                    <form action="/add-to-cart" method="POST">
+                        <input type="hidden" name="bookId" value="<%= book._id %>">
+                        <input type="hidden" name="name" value="<%= book.title %>">
+                        <input type="hidden" name="price" value="<%= book.price %>">
+                        <input type="hidden" name="image" value="/images/default-book.png">
+                        <button type="submit"
+                            class="bg-green-600 text-white font-semibold py-2 px-4 rounded hover:bg-green-700 w-full">
+                            Add to Cart
+                        </button>
+                    </form>
+
+                    <a href="mailto:<%= book.sellerDetails.email %>?subject=Regarding your book: <%= book.title %>"
+                        class="block text-center bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-semibold">
+                        Contact Seller
+                    </a>
+
+                    <a href="/booksbrowse"
+                        class="block text-center bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 font-semibold">
+                        Back to Store
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

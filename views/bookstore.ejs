@@ -31,7 +31,7 @@
                 <a href="./#contact" class="p-2 rounded-lg hover:bg-blue-800">Contact</a>
                 <a href="/addbook" class="p-2 rounded-lg hover:bg-blue-800">List Book</a>
                 <a href="/account" class="bg-white text-blue-600 px-4 py-2 rounded-lg">My Account</a>
-                <a href="#" class="bg-white text-blue-600 px-4 py-2 rounded-lg">Cart</a>
+                <!-- <a href="/add-to-cart" class="bg-white text-blue-600 px-4 py-2 rounded-lg">Cart</a> -->
             </nav>
 
             <!-- Mobile Menu Button -->
@@ -49,7 +49,7 @@
         <a href="./#contact" class="p-2 hover:bg-blue-800">Contact</a>
         <a href="/addbook" class="p-2 hover:bg-blue-800">List Book</a>
         <a href="/account" class="bg-white text-blue-600 px-4 py-2 rounded-lg">My Account</a>
-        <a href="#" class="bg-white text-blue-600 px-4 py-2 rounded-lg">Cart</a>
+        <!-- <a href="#" class="bg-white text-blue-600 px-4 py-2 rounded-lg">Cart</a> -->
     </div>
 
     <!-- Overlay (Hidden by Default) -->
@@ -118,7 +118,7 @@
             Available Books
         </h2>
         <!-- Books Container -->
-        <div id="book-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+        <div id="book-container store-book" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
             <!-- 📘 Book 1 -->
             <div class="book-card bg-white p-4 rounded shadow-lg transition duration-300 hover:shadow-2xl hover:scale-105 flex flex-col items-center h-full relative"
                 data-book-id="book001">
@@ -138,9 +138,11 @@
                 <p class="book-price text-blue-600 font-bold mt-1">₹2999</p>
 
                 <button
-                    class="mt-2 bg-blue-600 text-white py-2 px-4 rounded w-full hover:bg-blue-700 hover:shadow-xl transition-all duration-300">
+                    class="mt-2 bg-green-600 text-white py-2 px-4 rounded w-full hover:bg-green-700 hover:shadow-xl transition-all duration-300">
                     Buy Now
                 </button>
+
+
 
                 <form action="/add-to-cart" method="POST" class="add-to-cart-form mt-2 w-full">
                     <input type="hidden" name="bookId">
@@ -226,6 +228,57 @@
                 <a class="books-loading" href="/booksbrowse">Explore books -></a>
             </button>
         </div> -->
+
+        <div id="book-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+            <% books.forEach(book=> { %>
+                <div class="book-card bg-white p-4 rounded shadow-lg transition duration-300 hover:shadow-2xl hover:scale-105 flex flex-col items-center h-full relative"
+                    data-book-id="<%= book._id %>">
+
+                    <span
+                        class="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-orange-400 text-white px-3 py-1 text-sm font-bold rounded-md shadow-md z-3">
+                        <%= book.bookType %> Book
+                    </span>
+
+                    <div class="relative w-full h-80 mb-4">
+                        <!-- Default image or dynamic if added later -->
+                        <img src="/images/default-book.png" alt="<%= book.title %>"
+                            class="book-image w-full h-full object-cover rounded-md">
+                    </div>
+
+                    <h3 class="book-title font-bold text-lg mt-1">
+                        <%= book.title %>
+                    </h3>
+                    <p class="book-author text-gray-600 capitalize">Purpose: <%= book.bookPurpose %>
+                    </p>
+                    <p class="book-price text-blue-600 font-bold mt-1">₹<%= book.price %>
+                    </p>
+
+                    <button
+                        class="mt-2 bg-blue-600 text-white py-2 px-4 rounded w-full hover:bg-blue-700 hover:shadow-xl transition-all duration-300">
+                        Buy Now
+                    </button>
+
+                    <!-- ✅ View Button -->
+                    <a href="/bookpost/view/<%= book._id %>"
+                        class="bg-indigo-600 text-white mt-2 py-2 px-4 rounded w-full text-center hover:bg-indigo-700 hover:shadow-xl transition-all duration-300">
+                        View Book
+                    </a>
+
+                    <!-- Optional Cart -->
+                    <form action="/add-to-cart" method="POST" class="add-to-cart-form mt-2 w-full">
+                        <input type="hidden" name="bookId" value="<%= book._id %>">
+                        <input type="hidden" name="name" value="<%= book.title %>">
+                        <input type="hidden" name="price" value="<%= book.price %>">
+                        <input type="hidden" name="image" value="/images/default-book.png">
+                        <button type="submit"
+                            class="add-to-cart bg-green-600 text-white py-2 px-4 rounded w-full hover:bg-green-700 hover:shadow-xl transition-all duration-300">
+                            Add to Cart
+                        </button>
+                    </form>
+                </div>
+                <% }); %>
+        </div>
+
     </section>
     <footer class="footer pt-10 mt-10 bg-gray-900 text-white">
         <div class="container mx-auto">

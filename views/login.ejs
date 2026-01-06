@@ -1,18 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
+
 <body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <!-- ✅ Signup success alert -->
+    <script>
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get("error") === "invalid") {
+            document.addEventListener("DOMContentLoaded", () => {
+                const msg = document.getElementById("errorBox");
+                msg.classList.remove("hidden");
+                msg.innerText = "❌ Invalid email or password";
+            });
+        }
+
+        if (params.get("success")) {
+            alert("User registered successfully");
+        }
+    </script>
+
+
     <div class="bg-white shadow-lg rounded-lg p-6 w-96">
         <div class="flex justify-between mb-4">
             <button class="text-gray-500 border-b-2 border-gray-500 pb-1">Login</button>
             <a href="/signup" class="text-blue-500">Sign Up</a>
             <a href="#" class="text-blue-500">Forgot Password?</a>
         </div>
+        <div id="errorBox"
+            class="hidden mb-4 p-3 rounded-lg bg-red-100 text-red-700 border border-red-400 text-sm text-center">
+        </div>
+
         <form action="/login" method="POST">
             <label class="block text-gray-700">Email or Phone Number</label>
             <input type="text" name="email" class="w-full p-2 border rounded-lg mb-4" required>
@@ -20,7 +46,7 @@
             <label class="block text-gray-700">Password</label>
             <div class="relative">
                 <input type="password" name="password" class="w-full p-2 border rounded-lg" required>
-                <span class="absolute right-3 top-3 cursor-pointer">👁️</span>
+                <span class="absolute right-3 top-3 cursor-pointer"></span>
             </div>
 
             <div class="flex items-center mt-2">
@@ -29,8 +55,9 @@
             </div>
 
             <button type="submit" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg w-full">Login</button>
-            <p class="mt-2 text-sm text-center">Back to <a href="/" class="text-blue-500"><< Home</a></p>
+            <p class="mt-2 text-sm text-center">Back to <a href="/" class="text-blue-500">&lt;&lt; Home</a></p>
         </form>
     </div>
 </body>
+
 </html>

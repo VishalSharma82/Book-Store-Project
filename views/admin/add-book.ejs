@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add New Book | Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+  <!-- 🔵 NAVBAR (Same as Dashboard) -->
+  <nav class="bg-blue-600 px-6 py-4 flex items-center justify-between">
+    <div class="text-white text-xl font-bold flex items-center gap-2">
+      📘 Booket <span class="text-sm font-normal opacity-80">Admin</span>
+    </div>
+
+    <div class="flex gap-4">
+      <a href="/admin/dashboard" class="text-white font-medium">Dashboard</a>
+      <a href="/admin/manage-books" class="text-white font-medium">Manage Books</a>
+      <a href="/admin/logout"
+         class="bg-white text-blue-600 px-4 py-1 rounded-lg font-semibold">
+        Logout
+      </a>
+    </div>
+  </nav>
+
+  <!-- 📘 PAGE CONTENT -->
+  <div class="max-w-4xl mx-auto px-6 py-10">
+
+    <h2 class="text-3xl font-bold text-gray-800 mb-8">
+      ➕ Add New Book
+    </h2>
+
+    <!-- FORM CARD -->
+    <div class="bg-white p-8 rounded-xl shadow-lg">
+
+      <form method="POST" class="space-y-6">
+
+        <!-- Book Title -->
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">
+            Book Title
+          </label>
+          <input
+            type="text"
+            name="title"
+            placeholder="Enter book title"
+            required
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <!-- Price -->
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">
+            Price (₹)
+          </label>
+          <input
+            type="number"
+            name="price"
+            placeholder="Enter price"
+            required
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <!-- Quantity -->
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">
+            Stock Quantity
+          </label>
+          <input
+            type="number"
+            name="quantity"
+            placeholder="Available stock"
+            required
+            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="flex gap-4 pt-4">
+          <button
+            type="submit"
+            class="bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+          >
+            ➕ Add Book
+          </button>
+
+          <a href="/admin/dashboard"
+             class="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-semibold hover:bg-gray-300 transition">
+            Cancel
+          </a>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+</body>
+</html>
